@@ -1,15 +1,13 @@
 from typing import Annotated
-
 from typing_extensions import TypedDict
-
 from dotenv import load_dotenv
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
 import json
-
 from langchain_core.messages import ToolMessage
-
 from langgraph.prebuilt import ToolNode, tools_condition
+from langchain_openai import ChatOpenAI
+from langchain_community.tools.tavily_search import TavilySearchResults
 
 load_dotenv()
 
@@ -48,9 +46,6 @@ class BasicToolNode:
 
 graph_builder = StateGraph(State)
 
-from langchain_openai import ChatOpenAI
-
-from langchain_community.tools.tavily_search import TavilySearchResults
 
 tool = TavilySearchResults(max_results=2)
 tools = [tool]
